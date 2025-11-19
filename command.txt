@@ -1,0 +1,7 @@
+Suspend-Service MSExchangeTransport
+Send-MailMessage -To youruser@yourdomain.com -From youruser@yourdomain.com -Subject "QueueTest" -Body "Test" -SmtpServer localhost
+Get-Queue | Select Identity, Status, MessageCount, NextHopDomain
+Resume-Service MSExchangeTransport
+Start-Service MSExchangeTransport
+Send-MailMessage -To fakeuser@domainthatdoesnotexist1234.com -From youruser@yourdomain.com -Subject "RetryTest" -SmtpServer localhost
+Get-Queue | Where-Object Status -eq "Retry"
