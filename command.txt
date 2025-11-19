@@ -5,3 +5,4 @@ Resume-Service MSExchangeTransport
 Start-Service MSExchangeTransport
 Send-MailMessage -To fakeuser@domainthatdoesnotexist1234.com -From youruser@yourdomain.com -Subject "RetryTest" -SmtpServer localhost
 Get-Queue | Where-Object Status -eq "Retry"
+Get-Service MSExchangeTransport, MSExchangeFrontEndTransport
