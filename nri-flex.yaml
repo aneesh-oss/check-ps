@@ -1,0 +1,24 @@
+integrations:
+  - name: nri-flex
+    config:
+      name: exchangequeue
+      interval: 60
+      timeout: 30
+      apis:
+        - name: exchangedata
+          commands:
+            - name: get_exchange_queue
+              command: powershell -ExecutionPolicy Bypass -File "C:\Users\Administrator\Desktop\exchange\testExchange.ps1"
+              parse_json: true
+              events:
+                - event_type: ExchangeQueueData
+                  attributes:
+                    host: "{{$.host}}"
+                    alertStatus: "{{$.alertStatus}}"
+                    queueCount: "{{$.queueCount}}"
+                    retryQueueCount: "{{$.retryQueueCount}}"
+                    totalMessageCount: "{{$.totalMessageCount}}"
+                    queue1_Identity: "{{$.queue1_Identity}}"
+                    queue1_MessageCount: "{{$.queue1_MessageCount}}"
+                    queue1_Status: "{{$.queue1_Status}}"
+                    queue1_NextHop: "{{$.queue1_NextHop}}"
